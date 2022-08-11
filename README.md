@@ -1,4 +1,4 @@
-# List pods that has HostPath
+# List pods that contains HostPath
 
 This code will connect to every GKE cluster and list all the pods that is mount volume as `HostPath`, for more information about `hostPath` see, [Kubernetes HostPath] (https://kubernetes.io/docs/concepts/storage/volumes/#hostpath)
 
@@ -12,9 +12,11 @@ You can choose to build the binary by running
 ```
 go build -o list-pods
 ```
+
 and run it as
 ```
 ./list-pods -project=<PROJECTNAME>
+```
 
 or without building the binary
 ```
@@ -25,7 +27,7 @@ go run main.go -project=<PROJECTNAME>
 You will have an output like the following:
 
 ```
-CLUSTER NAME           POD NAME                                                                             NAMESPACE            VOLUME TYPE                VOLUMES PATH
+CLUSTER NAME           POD NAME                                                                        NAMESPACE            VOLUME TYPE                VOLUMES PATH
 test-gke          test-76665f4d68-f4gcz                                                                default              Directory                  /                                                        
 test-gke          event-exporter-gke-5479fd58c8-p84kc                                                  kube-system                                     /etc/ssl/certs                                           
 test-gke          fluentbit-gke-4pcm8                                                                  kube-system                                     /var/run/google-fluentbit/pos-files                      
@@ -43,3 +45,5 @@ test-gke          fluentbit-gke-tr879                                           
 test-gke          gke-metrics-agent-94mhr                                                              kube-system          Directory                  /etc/ssl/certs                                           
 test-gke          gke-metrics-agent-sgg9w                                                              kube-system          Directory                  /etc/ssl/certs                          
 ```
+
+If the `VOLUME TYPE` column is empty, it means the manifest contains an empty `type`. The `VOLUME PATH` represents the host path that has being mounted inside the pod.
