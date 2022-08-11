@@ -29,7 +29,7 @@ func ListPods(svc *container.Service, projectID, zone string) error {
 	}
 
 	// header
-	fmt.Fprintf(w, "\n%s\t\t%s\t\t\t\t%s\t\t%s\t\t%s", "CLUSTER NAME", "POD NAME", "NAMESPACE", "VOLUME TYPE", "VOLUMES PATH")
+	fmt.Fprintf(w, "\n%s\t\t%s\t\t%s\t\t%s\t\t%s", "CLUSTER NAME", "POD NAME", "NAMESPACE", "VOLUME TYPE", "VOLUMES PATH")
 
 	// sorting by node count
 	sort.Slice(list.Clusters, func(i, j int) bool {
@@ -43,8 +43,6 @@ func ListPods(svc *container.Service, projectID, zone string) error {
 
 	// gathering cluster name, pods name, volume path
 	for _, v := range list.Clusters {
-		//fmt.Fprintf(w, "\n%s\t\t", v.Name)
-		//fmt.Fprintf(w, "%d\t\t", v.CurrentNodeCount)
 
 		cfg, err := clientcmd.NewNonInteractiveClientConfig(*kubeConfig, v.Name, &clientcmd.ConfigOverrides{CurrentContext: v.Name}, nil).ClientConfig()
 		if err != nil {
@@ -63,11 +61,12 @@ func ListPods(svc *container.Service, projectID, zone string) error {
 
 		for _, pod := range pods.Items {
 			volumes := pod.Spec.Volumes
+
 			for _, volume := range volumes {
 				hostpath := volume.HostPath
 				if hostpath == nil {
 				} else {
-					fmt.Fprintf(w, "\n%s\t\t%s\t\t\t\t%s\t\t%s\t\t%s\t\t", v.Name, pod.Name, pod.Namespace, *hostpath.Type, hostpath.Path)
+					fmt.Fprintf(w, "\n%s\t\t%s\t\t%s\t\t%s\t\t%s\t\t", v.Name, pod.Name, pod.Namespace, *hostpath.Type, hostpath.Path)
 				}
 			}
 		}

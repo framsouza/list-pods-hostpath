@@ -48,26 +48,3 @@ func main() {
 		log.Fatal(err)
 	}
 }
-
-// WORKING
-/*
-	w := new(tabwriter.Writer)
-	w.Init(os.Stdout, 10, 10, 0, ' ', 0)
-	defer w.Flush()
-
-	fmt.Fprintf(w, "\n%s\t\t\t\t%s\t\t%s\t\t%s", "PODS NAME", "NAMESPACE", "VOLUME TYPE", "VOLUMES PATH")
-
-	pods, err := clientset.CoreV1().Pods("").List(context.TODO(), metav1.ListOptions{})
-	if err != nil {
-		panic(err.Error())
-	}
-
-	for _, pod := range pods.Items {
-		volumes := pod.Spec.Volumes
-		for _, volume := range volumes {
-			hostpath := volume.HostPath
-			if hostpath == nil {
-			} else {
-				fmt.Fprintf(w, "\n%s\t\t\t\t%s\t\t%s\t\t%s\t\t", pod.Name, pod.Namespace, *hostpath.Type, hostpath.Path)
-			}
-		}*/

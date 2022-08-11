@@ -4,7 +4,7 @@ This code will connect to every GKE cluster and list all the pods that is mount 
 
 ## Usage
 
-First, make sure you have the GOOGLE_APPLICATION_CREDENTIALS environment variable set as per the google docs, https://cloud.google.com/docs/authentication/production
+First, make sure you have the `GOOGLE_APPLICATION_CREDENTIALS` environment variable set as per the [google docs](https://cloud.google.com/docs/authentication/production).
 
 It will require one argument which is `project`, to connect to the specify GKE project to list the pods. By default the zone is set to `-` which means all GKE zones.
 
