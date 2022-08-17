@@ -1,4 +1,4 @@
-# List pods that contains HostPath
+# List pods that mounts hostPath
 
 This code will connect to every GKE cluster and list all the pods that is mount volume as `HostPath`, for more information about `hostPath` see, [Kubernetes HostPath](https://kubernetes.io/docs/concepts/storage/volumes/#hostpath)
 
